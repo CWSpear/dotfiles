@@ -1,7 +1,7 @@
 # source $ZSH/oh-my-zsh.sh
 # start antigen
 
-source $HOME/.ghetto-package-manager/antigen/antigen.zsh
+source $HOME/.antigen.zsh
 
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
