@@ -14,7 +14,7 @@ antigen bundle command-not-found
 antigen bundle zsh-users/fizsh
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-history-substring-search
-antigen bundle tarruda/zsh-autosuggestions
+# antigen bundle tarruda/zsh-autosuggestions
 
 # Load the theme.
 antigen theme https://gist.github.com/CWSpear/f48efd4474ce1bdedf9d.git cwspear
@@ -36,10 +36,12 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
 # autosuggestions config
 # Enable autosuggestions automatically
-zle-line-init() {
-    zle autosuggest-start
-}
-zle -N zle-line-init
+# zle-line-init() {
+#     zle autosuggest-start
+# }
+# zle -N zle-line-init
+# bindkey '^f' vi-forward-blank-word
+# bindkey '^T' autosuggest-toggle
 
 # User configuration
 
