@@ -1,4 +1,3 @@
-# source $ZSH/oh-my-zsh.sh
 # start antigen
 
 source $HOME/.antigen.zsh
@@ -45,11 +44,13 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
 # User configuration
 
-# Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='nano' # remote
+  # remote stuff only
+  export EDITOR='nano'
 else
-  export EDITOR='subl' # local
+  # local stuff only
+  export EDITOR='subl'
+  [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
 fi
 
 # Exports
