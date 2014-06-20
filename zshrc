@@ -1,3 +1,11 @@
+# temporary things?
+if [[ -n $SSH_CONNECTION ]]; then
+  # remote stuff only
+else
+  # local stuff only
+  export DOCKER_HOST=tcp://192.168.59.103:2375
+fi
+
 # start antigen
 
 source $HOME/.antigen.zsh
@@ -23,6 +31,10 @@ antigen apply
 
 # end antigen
 
+# cool helper functions
+mkc () {
+    mkdir -p "$@" && cd "$@"
+}
 
 # history-substring-search config
 # bind UP and DOWN arrow keys
