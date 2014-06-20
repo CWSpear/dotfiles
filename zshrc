@@ -58,7 +58,7 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
 if [[ -n $SSH_CONNECTION ]]; then
   # remote stuff only
-  export EDITOR='nano'
+  export EDITOR='vim'
 else
   # local stuff only
   export EDITOR='subl'
