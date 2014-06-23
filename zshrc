@@ -32,7 +32,7 @@ antigen apply
 # end antigen
 
 # cool helper functions
-mkc () {
+mkcd () {
     mkdir -p "$@" && cd "$@"
 }
 
