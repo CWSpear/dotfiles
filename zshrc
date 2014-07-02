@@ -36,6 +36,10 @@ mkcd () {
     mkdir -p "$@" && cd "$@"
 }
 
+# phpv () {
+#     vagrant ssh -c "cd /vagrant && php $@"
+# }
+
 # history-substring-search config
 # bind UP and DOWN arrow keys
 zmodload zsh/terminfo
