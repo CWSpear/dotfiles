@@ -14,8 +14,28 @@ source $HOME/.antigen.zsh
 antigen use oh-my-zsh
 
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
-antigen bundle git
+antigen bundle ant
+antigen bundle autojump
+antigen bundle battery
+antigen bundle bower
+antigen bundle brew
 antigen bundle command-not-found
+antigen bundle compleat
+antigen bundle composer
+antigen bundle dirpersist
+antigen bundle docker
+antigen bundle gem
+antigen bundle git
+antigen bundle laravel4
+antigen bundle npm
+antigen bundle osx
+antigen bundle per-directory-history
+antigen bundle ruby
+antigen bundle sublime
+antigen bundle supervisor
+antigen bundle textmate
+antigen bundle vagrant
+antigen bundle web-search
 
 # Fish-like bundles
 antigen bundle zsh-users/fizsh
@@ -39,6 +59,9 @@ mkcd () {
 # phpv () {
 #     vagrant ssh -c "cd /vagrant && php $@"
 # }
+
+# nifty aliases
+alias ccat="pygmentize -g"
 
 # history-substring-search config
 # bind UP and DOWN arrow keys
@@ -66,7 +89,6 @@ if [[ -n $SSH_CONNECTION ]]; then
 else
   # local stuff only
   export EDITOR='subl'
-  [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
 fi
 
 # Exports

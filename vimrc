@@ -1,5 +1,3 @@
-set showcmd
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -20,40 +18,64 @@ set encoding=utf8
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
+" set our tabs to 4 spaces
+set ts=4
 
-""""""""""""""
-""" VUNDLE """
-""""""""""""""
+" turn syntax highlighting on by default
+syntax on
+filetype plugin indent on
 
-set nocompatible              " be iMproved, required
-filetype off                  " required
+" set auto-indenting on for programming
+set ai
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+" turn off compatibility with the old vi
+set nocompatible
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+" turn on the "visual bell" - which is much quieter than the "audio blink"
+set vb
 
-Plugin 'Lokaltog/powerline'
+" automatically show matching brackets. works like it does in bbedit.
+set showmatch
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList          - list configured plugins
-" :PluginInstall(!)    - install (update) plugins
-" :PluginSearch(!) foo - search (or refresh cache first) for foo
-" :PluginClean(!)      - confirm (or auto-approve) removal of unused plugins
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+" make that backspace key work the way it should
+set backspace=indent,eol,start
 
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
+" show commands as you type them
+set showcmd
+
+" """"""""""""""
+" """ VUNDLE """
+" """"""""""""""
+
+" set nocompatible              " be iMproved, required
+" filetype off                  " required
+
+" " set the runtime path to include Vundle and initialize
+" set rtp+=~/.vim/bundle/Vundle.vim
+" call vundle#begin()
+" " alternatively, pass a path where Vundle should install plugins
+" "call vundle#begin('~/some/path/here')
+
+" " let Vundle manage Vundle, required
+" Plugin 'gmarik/Vundle.vim'
+
+" Plugin 'Lokaltog/powerline'
+
+" " All of your Plugins must be added before the following line
+" call vundle#end()            " required
+" filetype plugin indent on    " required
+" " To ignore plugin indent changes, instead use:
+" "filetype plugin on
+" "
+" " Brief help
+" " :PluginList          - list configured plugins
+" " :PluginInstall(!)    - install (update) plugins
+" " :PluginSearch(!) foo - search (or refresh cache first) for foo
+" " :PluginClean(!)      - confirm (or auto-approve) removal of unused plugins
+" "
+" " see :h vundle for more details or wiki for FAQ
+" " Put your non-Plugin stuff after this line
+
+" python from powerline.vim import setup as powerline_setup
+" python powerline_setup()
+" python del powerline_setup
