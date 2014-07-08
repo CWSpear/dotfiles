@@ -52,16 +52,44 @@ antigen apply
 # end antigen
 
 # cool helper functions
-mkcd () {
-    mkdir -p "$@" && cd "$@"
+function mkcd() {
+  mkdir -p "$@" && cd "$@"
 }
 
-# phpv () {
-#     vagrant ssh -c "cd /vagrant && php $@"
-# }
+function vgdo() {
+  eval "vagrant ssh -c \"cd /vagrant && $@\""
+}
+
+# do a Matrix movie effect of falling characters
+function matrix() {
+  echo -e "\e[1;40m" ; clear ; while :; do echo $LINES $COLUMNS $(( $RANDOM % $COLUMNS)) $(( $RANDOM % 72 )) ;sleep 0.05; done|gawk '{ letters="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()"; c=$4; letter=substr(letters,c,1);a[$3]=0;for (x in a) {o=a[x];a[x]=a[x]+1; printf "\033[%s;%sH\033[2;32m%s",o,x,letter; printf "\033[%s;%sH\033[1;37m%s\033[0;0H",a[x],x,letter;if (a[x] >= $1) { a[x]=0; } }}'
+}
+
+function matrix2() {
+  echo -e "\e[1;40m" ; clear ; characters=$( jot -c 94 33 | tr -d '\n' ) ; while :; do echo $LINES $COLUMNS $(( $RANDOM % $COLUMNS)) $(( $RANDOM % 72 )) $characters ;sleep 0.05; done|gawk '{ letters=$5; c=$4; letter=substr(letters,c,1);a[$3]=0;for (x in a) {o=a[x];a[x]=a[x]+1; printf "\033[%s;%sH\033[2;32m%s",o,x,letter; printf "\033[%s;%sH\033[1;37m%s\033[0;0H",a[x],x,letter;if (a[x] >= $1) { a[x]=0; } }}'
+}
+
+function matrix3() {
+  echo -e "\e[1;40m" ; clear ; while :; do echo $LINES $COLUMNS $(( $RANDOM % $COLUMNS)) $( printf "\U$(( $RANDOM % 500 ))" ) ;sleep 0.05; done|gawk '{c=$4; letter=$4;a[$3]=0;for (x in a) {o=a[x];a[x]=a[x]+1; printf "\033[%s;%sH\033[2;32m%s",o,x,letter; printf "\033[%s;%sH\033[1;37m%s\033[0;0H",a[x],x,letter;if (a[x] >= $1) { a[x]=0; } }}'
+}
+
+function find.name() {
+  wild=\'\*$1\*\'
+  sh -c "find . -iname $wild"
+}
+
+# Use Mac OSX Preview to open a man page in a more handsome format
+function manp() {
+  man -t $1 | open -f -a /Applications/Preview.app
+}
 
 # nifty aliases
 alias ccat="pygmentize -g"
+
+alias lessc='less -R' # Lets color escape sequences carry through to less
+alias morec='more -R'
+alias lesscolor='less -R'
+alias morecolor='more -R'
 
 # history-substring-search config
 # bind UP and DOWN arrow keys
