@@ -29,7 +29,6 @@ antigen bundle git
 antigen bundle laravel4
 antigen bundle npm
 antigen bundle osx
-antigen bundle per-directory-history
 antigen bundle ruby
 antigen bundle sublime
 antigen bundle supervisor
@@ -59,6 +58,7 @@ function mkcd() {
 function vgdo() {
   eval "vagrant ssh -c \"cd /vagrant && $@\""
 }
+alias vudo=vgdo
 
 # do a Matrix movie effect of falling characters
 function matrix() {
