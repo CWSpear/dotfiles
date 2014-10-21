@@ -6,8 +6,9 @@ else
   export DOCKER_HOST=tcp://192.168.59.103:2375
 
   # phpbrew's only going to be on local box
-  export PHPBREW_SET_PROMPT=1
+  # export PHPBREW_SET_PROMPT=1
   source ~/.phpbrew/bashrc
+  export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 fi
 
 # start antigen
@@ -154,6 +155,9 @@ export PATH=${PATH}:/sbin
 # my scripts!
 export PATH="$PATH:/Users/cameron/.bin"  
 
+# global composer
+export PATH="$PATH:/Users/cameron/.composer/vendor/bin"
+
 export PATH
 
 # Added by the Heroku Toolbelt
@@ -223,5 +227,5 @@ if [[ -n $SSH_CONNECTION ]]; then
   # remote stuff only
 else
   # local stuff only
-  phpbrew switch "php-5.4.33"
+  phpbrew switch "php-5.6.1"
 fi
