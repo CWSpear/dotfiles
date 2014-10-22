@@ -137,7 +137,7 @@ fi
 # Exports
 
 # node npm
-export PATH=/usr/local/share/npm/bin
+export PATH=${PATH}:/usr/local/share/npm/bin
 
 # homebrew
 export PATH=${PATH}:/usr/local/bin
@@ -158,13 +158,14 @@ export PATH="$PATH:/Users/cameron/.bin"
 # global composer
 export PATH="$PATH:/Users/cameron/.composer/vendor/bin"
 
-export PATH
-
 # Added by the Heroku Toolbelt
 export PATH="$PATH:/usr/local/heroku/bin"
 
 # Xcode
 export PATH=${PATH}:/Development/android-sdk-macosx/platform-tools:/Development/android-sdk-macosx/tools:/usr/local/share/npm/bin:/Development/android-ndk-macosx:/usr/local/share/python/
+
+# Add RVM to PATH for scripting
+export PATH="$PATH:$HOME/.rvm/bin"
 
 export MANPATH="/usr/local/man:$MANPATH"
 
@@ -227,5 +228,5 @@ if [[ -n $SSH_CONNECTION ]]; then
   # remote stuff only
 else
   # local stuff only
-  phpbrew switch "php-5.6.1"
+  phpbrew switch "php-5.4.33"
 fi
