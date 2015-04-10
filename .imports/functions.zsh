@@ -44,8 +44,6 @@ function zupdate() {
   CURDIR=`pwd`
   cd ${ZDOTDIR} 
   git pull 
-  cd .zprezto 
-  git pull 
   git submodule update --init --recursive
   cd $CURDIR
 }
