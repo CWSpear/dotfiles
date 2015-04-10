@@ -1,1 +1,1 @@
-/Users/cameron/.dotfiles/.zprezto/runcoms/zlogout
+.zprezto/runcoms/zlogout

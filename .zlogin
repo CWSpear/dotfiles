@@ -1,1 +1,1 @@
-/Users/cameron/.dotfiles/.zprezto/runcoms/zlogin
+.zprezto/runcoms/zlogin
