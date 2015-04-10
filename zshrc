@@ -1,3 +1,4 @@
+START=`ruby -e 'puts Time.now.to_f'`
 if [[ -n $SSH_CONNECTION ]]; then
   # remote stuff only
 else
@@ -179,3 +180,6 @@ fi
 ###-end-npm-completion-###
 
 
+END=`ruby -e 'puts Time.now.to_f'`
+
+echo "Time to load: $((END-START))"
