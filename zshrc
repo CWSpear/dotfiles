@@ -4,10 +4,14 @@ if [[ -n $SSH_CONNECTION ]]; then
 else
   # local stuff only
   export DOCKER_HOST=tcp://192.168.59.103:2375
+  export ANDROID_HOME=/usr/local/opt/android-sdk
+  export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
 
   # phpbrew's only going to be on local box
-  # export PHPBREW_SET_PROMPT=1
+  export PHPBREW_SET_PROMPT=1
   source ~/.phpbrew/bashrc
+  source ~/.phpbrewexport/bashrc
+
   export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 fi
 
@@ -65,6 +69,18 @@ function vgdo() {
 }
 alias vudo=vgdo
 
+# video -> gif
+gifify() {
+  if [[ -n "$1" ]]; then
+    mkdir ./.temp-out-static
+    ffmpeg -i $1 -r 10 -vcodec png ./.temp-out-static/out-static-%05d.png
+    time convert -verbose +dither -layers Optimize -resize 664x664\> ./.temp-out-static/out-static*.png  GIF:- | gifsicle --colors 128 --delay=8 --loop --optimize=3 --multifile - > $1.gif
+    rm -Rf ./.temp-out-static
+  else
+    echo "usage: gifify <input-movie.mov>"
+  fi
+}
+
 # "mario" user do
 function mudo() {
   PWD=`pwd`
@@ -112,6 +128,8 @@ zmodload zsh/terminfo
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
 
+setopt HIST_FIND_NO_DUPS
+
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
 
@@ -138,6 +156,8 @@ fi
 
 # node npm
 export PATH=${PATH}:/usr/local/share/npm/bin
+# locally installed npm moduls
+export PATH=${PATH}:./node_modules/.bin
 
 # homebrew
 export PATH=${PATH}:/usr/local/bin
@@ -153,10 +173,16 @@ export PATH=${PATH}:/usr/sbin
 export PATH=${PATH}:/sbin
 
 # my scripts!
-export PATH="$PATH:/Users/cameron/.bin"  
+export PATH="$PATH:~/.bin"  
 
 # global composer
-export PATH="$PATH:/Users/cameron/.composer/vendor/bin"
+export PATH="$PATH:~/.composer/vendor/bin"
+
+# local composer scripts
+export PATH="$PATH:./vendor/bin"
+
+# any scripts in .!
+export PATH="$PATH:."  
 
 # Added by the Heroku Toolbelt
 export PATH="$PATH:/usr/local/heroku/bin"
@@ -223,10 +249,5 @@ elif type compctl &>/dev/null; then
 fi
 ###-end-npm-completion-###
 
+setopt interactivecomments
 
-if [[ -n $SSH_CONNECTION ]]; then
-  # remote stuff only
-else
-  # local stuff only
-  phpbrew switch "php-5.4.33"
-fi
