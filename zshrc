@@ -1,4 +1,9 @@
 START=`ruby -e 'puts Time.now.to_f'`
+
+export ZDOTDIR="${HOME}/.dotfiles"
+source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+export HISTFILE="${HOME}/.zsh_history"
+
 if [[ -n $SSH_CONNECTION ]]; then
   # remote stuff only
 else
@@ -62,6 +67,10 @@ alias morec='more -R'
 alias lesscolor='less -R'
 alias morecolor='more -R'
 
+alias lsa='ls -lah'
+
+alias zupdate='cd ~/.dotfiles && git pull && git submodule update --init --recursive'
+
 # history-substring-search config
 # bind UP and DOWN arrow keys
 zmodload zsh/terminfo
@@ -69,7 +78,6 @@ bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
-
 
 # autosuggestions config
 # Enable autosuggestions automatically
