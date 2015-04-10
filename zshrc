@@ -1,4 +1,3 @@
-# temporary things?
 if [[ -n $SSH_CONNECTION ]]; then
   # remote stuff only
 else
