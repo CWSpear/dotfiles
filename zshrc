@@ -69,7 +69,8 @@ alias morecolor='more -R'
 
 alias lsa='ls -lah'
 
-alias zupdate='cd ~/.dotfiles && git pull && cd .zprezto && git pull && git submodule update --init --recursive'
+alias zupdate="cd ${ZDOTDIR} && git pull && cd .zprezto && git pull && git submodule update --init --recursive"
+alias zpush="cd ${ZDOTDIR} && cd .zprezto && git commit -am '[auto-commit]' && git push && .. && git commit -am '[auto-commit]' && git push"
 
 # history-substring-search config
 # bind UP and DOWN arrow keys
