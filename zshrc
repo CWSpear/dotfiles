@@ -13,5 +13,8 @@ source "${IMPORTDIR}/aliases.zsh"
 source "${IMPORTDIR}/autocompletes.zsh"
 source "${IMPORTDIR}/settings.zsh"
 
+# start autojump
+# [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
+
 # END=`ruby -e 'puts Time.now.to_f'`
 # echo "Time to load: $((END-START))"
