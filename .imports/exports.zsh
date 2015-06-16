@@ -1,14 +1,15 @@
 if [[ -n $SSH_CONNECTION ]]; then
   # remote stuff only
-  export EDITOR='vim'
 else
   # local stuff only
-  export EDITOR='subl'
-
-  export DOCKER_HOST=tcp://192.168.59.103:2375
+  export DOCKER_HOST=tcp://192.168.59.103:2376
+  export DOCKER_CERT_PATH=/Users/cameron/.boot2docker/certs/boot2docker-vm
+  export DOCKER_TLS_VERIFY=1
 
   export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 fi
+
+export EDITOR='vim'
 
 export HISTFILE="${HOME}/.zsh_history"
 

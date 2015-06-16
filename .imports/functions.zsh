@@ -40,6 +40,16 @@ function manp() {
   man -t $1 | open -f -a /Applications/Preview.app
 }
 
+# Under Armour Deploy scripts shortcut
+function uad() {
+  sh ./deploy/$1.sh
+}
+
+function docker-nuke {
+  docker rmi -f $(docker images -q)
+  docker rm -f $(docker ps -a -q)
+}
+
 function zupdate() {
   CURDIR=`pwd`
   cd ${ZDOTDIR} 
