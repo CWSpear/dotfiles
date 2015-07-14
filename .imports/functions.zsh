@@ -46,8 +46,8 @@ function uad() {
 }
 
 function docker-nuke {
-  docker rmi -f $(docker images -q)
   docker rm -f $(docker ps -a -q)
+  docker rmi -f $(docker images -q)
 }
 
 function zupdate() {
