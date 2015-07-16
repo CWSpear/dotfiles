@@ -1,22 +1,30 @@
-# START=`ruby -e 'puts Time.now.to_f'`
+START=`ruby -e 'puts Time.now.to_f'`
 
-# only source it is it exists (i.e. probably only local)
-[[ -e ~/.phpbrew/bashrc ]] && source ~/.phpbrew/bashrc
-# [[ -e ~/.nvm/nvm.sh ]] && source ~/.nvm/nvm.sh
-
-# start up prezto
+# mission critical vars
 export ZDOTDIR="${HOME}/.dotfiles"
-source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-
-# set up IMPORTDIR and include all our customizations
-export IMPORTDIR="${ZDOTDIR}/.imports"
+export LIBDIR="${ZDOTDIR}/lib"
 export PLUGINDIR="${ZDOTDIR}/.plugins"
 
-source "${IMPORTDIR}/exports.zsh"
-source "${IMPORTDIR}/functions.zsh"
-source "${IMPORTDIR}/aliases.zsh"
-source "${IMPORTDIR}/autocompletes.zsh"
-source "${IMPORTDIR}/settings.zsh"
+# allow my custom modules to be used
+fpath=(
+  ${LIBDIR}/modules/prompt
+  ${fpath}
+)
 
-# END=`ruby -e 'puts Time.now.to_f'`
-# echo "Time to load: $((END-START))"
+# only source it is it exists (i.e. probably only local)
+# [[ -e ~/.phpbrew/bashrc ]] && source ~/.phpbrew/bashrc
+# [[ -e ~/.nvm/nvm.sh ]] && source ~/.nvm/nvm.sh
+
+# allow my custom modules to be used
+
+# start up prezto
+source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+
+source "${LIBDIR}/exports.zsh"
+source "${LIBDIR}/functions.zsh"
+source "${LIBDIR}/aliases.zsh"
+source "${LIBDIR}/autocompletes.zsh"
+source "${LIBDIR}/settings.zsh"
+
+END=`ruby -e 'puts Time.now.to_f'`
+echo "Time to load: $((END-START))"
