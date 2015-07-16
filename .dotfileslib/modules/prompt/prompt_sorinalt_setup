@@ -35,12 +35,14 @@ pmodload 'helper'
 function prompt_sorin_pwd {
   local pwd="${PWD/#$HOME/~}"
 
-  if [[ "$pwd" == (#m)[/~] ]]; then
-    _prompt_sorin_pwd="$MATCH"
-    unset MATCH
-  else
-    _prompt_sorin_pwd="${${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}//\%/%%}/${${pwd:t}//\%/%%}"
-  fi
+  _prompt_sorin_pwd=$pwd
+  # uncomment below and delete above for abbrev dir
+  # if [[ "$pwd" == (#m)[/~] ]]; then
+  #   _prompt_sorin_pwd="$MATCH"
+  #   unset MATCH
+  # else
+  #   _prompt_sorin_pwd="${${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}//\%/%%}/${${pwd:t}//\%/%%}"
+  # fi
 }
 
 function prompt_sorin_git_info {

@@ -1,9 +1,0 @@
-cd ~/.dotfiles
-FILES=`find . -depth 1 -type f -a ! -name '.?*' -o -name '.?*' -a ! -prune`
-cd ~
-for FILE in $FILES
-do
-    FINAL=${FILE/#.\//}
-    echo "ln -s \".dotfiles/$FINAL\" \".$FINAL\""
-    # mv "$FILE" "$DIR"
-done
