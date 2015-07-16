@@ -58,12 +58,3 @@ function docker-nuke {
   docker rm -f $(docker ps -a -q)
   docker rmi -f $(docker images -q)
 }
-
-function zupdate() {
-  CURDIR=`pwd`
-  cd ${ZDOTDIR} 
-  git pull 
-  git submodule update --init --recursive
-  cd $CURDIR
-  exec zsh # reloads prezto
-}

@@ -1,8 +1,7 @@
 # START=`ruby -e 'puts Time.now.to_f'`
 
 # mission critical vars
-export ZDOTDIR="${HOME}/.dotfiles"
-export LIBDIR="${ZDOTDIR}/.dotfileslib"
+export LIBDIR="$HOME/.homesick/repos/dotfiles/lib"
 
 # Load homeshick function and zsh completion.
 source $HOME/.homesick/repos/homeshick/homeshick.sh
