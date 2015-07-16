@@ -65,5 +65,5 @@ function zupdate() {
   git pull 
   git submodule update --init --recursive
   cd $CURDIR
-  source ~/.zshrc
+  exec zsh # reloads prezto
 }

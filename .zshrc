@@ -2,7 +2,11 @@
 
 # mission critical vars
 export ZDOTDIR="${HOME}/.dotfiles"
-export LIBDIR="${ZDOTDIR}/lib"
+export LIBDIR="${ZDOTDIR}/.dotfileslib"
+
+if [ -e "$HOME/.homesick/repos/homeshick/homeshick.sh" ]; then
+    source "$HOME/.homesick/repos/homeshick/homeshick.sh"
+fi
 
 # allow my custom modules to be used
 fpath=(
