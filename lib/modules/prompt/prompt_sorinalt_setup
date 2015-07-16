@@ -134,7 +134,7 @@ function prompt_sorin_setup {
     'rprompt' '%A%B%S%a%d%m%r%U%u'
 
   # Define prompts.
-  PROMPT='$([ $SSH_TTY ] && echo "%F{white}☃%f %F{cyan}[%f%F{blue}%n%f%F{cyan}@%f%F{yellow}%m%f%F{cyan}]%f" || echo "%F{white}%f") %F{yellow}${_prompt_sorin_pwd}%f${git_info:+${(e)git_info[prompt]}}%(!. %B%F{red}#%f%b.)${editor_info[keymap]} '
+  PROMPT='$([ $SSH_TTY ] && echo "%F{yellow}★%f %F{cyan}[%f%F{blue}%n%f%F{cyan}@%f%F{yellow}%m%f%F{cyan}]%f" || echo "%F{white}%f") %F{white}${_prompt_sorin_pwd}%f${git_info:+${(e)git_info[prompt]}}%(!. %B%F{red}#%f%b.)${editor_info[keymap]} '
   RPROMPT='${editor_info[overwrite]}%(?:: %F{red}⏎%f)${VIM:+" %B%F{green}V%f%b"}${INSIDE_EMACS:+" %B%F{green}E%f%b"}${git_info[rprompt]}'
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 }
