@@ -45,6 +45,15 @@ function uad() {
   sh ./deploy/$1.sh
 }
 
+# Under Armour Schema scripts shortcut
+function uas() {
+  sh ./schema/$1.sh
+}
+
+function dexec() {
+  docker exec -it "$1" bash
+}
+
 function docker-nuke {
   docker rm -f $(docker ps -a -q)
   docker rmi -f $(docker images -q)
