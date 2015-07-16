@@ -135,7 +135,7 @@ function prompt_sorin_setup {
 
   # environment aware symbol
   _echo_symbol="%F{white}%f"
-  if [ $SSH_TTY ]; then
+  if [ $SSH_CONNECTION ]; then
     _echo_symbol="%F{yellow}★%f %F{cyan}[%f%F{blue}%n%f%F{cyan}@%f%F{yellow}%m%f%F{cyan}]%f"
   elif [ $ZSH_DOCKER_DEV ]; then
     _echo_symbol="🐳 "
