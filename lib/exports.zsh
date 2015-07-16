@@ -2,13 +2,12 @@ if [[ -n $SSH_CONNECTION ]]; then
   # remote stuff only
 else
   # local stuff only
+  export DOCKER_HOST=tcp://192.168.59.103:2376
+  export DOCKER_CERT_PATH=$HOME/.boot2docker/certs/boot2docker-vm
+  export DOCKER_TLS_VERIFY=1
+
+  export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 fi
-
-export DOCKER_HOST=tcp://192.168.59.103:2376
-export DOCKER_CERT_PATH=$HOME/.boot2docker/certs/boot2docker-vm
-export DOCKER_TLS_VERIFY=1
-
-export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 export EDITOR='vim'
 
