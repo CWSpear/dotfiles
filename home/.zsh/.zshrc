@@ -4,9 +4,9 @@
 export ZDOTDIR="${HOME}/.dotfiles"
 export LIBDIR="${ZDOTDIR}/.dotfileslib"
 
-if [ -e "$HOME/.homesick/repos/homeshick/homeshick.sh" ]; then
-    source "$HOME/.homesick/repos/homeshick/homeshick.sh"
-fi
+# Load homeshick function and zsh completion.
+source $HOME/.homesick/repos/homeshick/homeshick.sh
+fpath=($HOME/.homesick/repos/homeshick/completions $fpath)
 
 # allow my custom modules to be used
 fpath=(
@@ -19,7 +19,7 @@ fpath=(
 # [[ -e ~/.nvm/nvm.sh ]] && source ~/.nvm/nvm.sh
 
 # start up prezto
-source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+source ${ZDOTDIR:-$HOME}/.zprezto/runcoms/zshrc
 
 source "${LIBDIR}/exports.zsh"
 source "${LIBDIR}/functions.zsh"

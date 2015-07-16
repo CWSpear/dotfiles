@@ -1,0 +1,15 @@
+source ${ZDOTDIR:-$HOME}/.zprezto/runcoms/zpreztorc
+
+# only things we need to override/add below here
+
+zstyle ':prezto:load' pmodule \
+  'fasd' \
+  'syntax-highlighting' \
+  'history-substring-search' \
+  'osx' \
+  'homebrew' \
+  'git'
+
+zstyle ':prezto:module:history-substring-search:color' found 'bg=blue,fg=white,bold'
+
+zstyle ':prezto:module:prompt' theme 'sorinalt'
