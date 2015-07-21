@@ -42,12 +42,12 @@ function manp() {
 
 # Under Armour Deploy scripts shortcut
 function uad() {
-  sh ./deploy/$1.sh
+  bash ./deploy/$1.sh
 }
 
 # Under Armour Schema scripts shortcut
 function uas() {
-  sh ./schema/$1.sh
+  bash ./schema/$1.sh
 }
 
 function dexec() {
