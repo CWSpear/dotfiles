@@ -8,27 +8,6 @@
 #   http://i.imgur.com/nrGV6pg.png
 #
 
-#
-# 16 Terminal Colors
-# -- ---------------
-#  0 black
-#  1 red
-#  2 green
-#  3 yellow
-#  4 blue
-#  5 magenta
-#  6 cyan
-#  7 white
-#  8 bright black
-#  9 bright red
-# 10 bright green
-# 11 bright yellow
-# 12 bright blue
-# 13 bright magenta
-# 14 bright cyan
-# 15 bright white
-#
-
 # Load dependencies.
 pmodload 'helper'
 
@@ -95,7 +74,7 @@ function prompt_sorin_precmd {
   _prompt_sorin_precmd_async_pid=$!
 }
 
-function prompt_sorin_setup {
+function prompt_sorinalt_setup {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent subst)
@@ -131,7 +110,7 @@ function prompt_sorin_setup {
   zstyle ':prezto:module:git:info:untracked' format ' %%B%F{white}◼%f%%b'
   zstyle ':prezto:module:git:info:keys' format \
     'prompt' ' $(coalesce "%b" "%p" "%c")%s' \
-    'rprompt' '%A%B%S%a%d%m%r%U%u'
+    'status' '%A%B%S%a%d%m%r%U%u'
 
   # environment aware symbol
   _echo_symbol="%F{white}%f"
@@ -145,8 +124,40 @@ function prompt_sorin_setup {
 
   # Define prompts.
   PROMPT='${_echo_symbol} %F{white}${_prompt_sorin_pwd}%f${git_info:+${(e)git_info[prompt]}}%(!. %B%F{red}#%f%b.)${editor_info[keymap]} '
-  RPROMPT='${editor_info[overwrite]}%(?:: %F{red}⏎%f)${VIM:+" %B%F{green}V%f%b"}${INSIDE_EMACS:+" %B%F{green}E%f%b"}${git_info[rprompt]}'
-  SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
+  RPROMPT=''
+  SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [Nyae]? '
+
+  function prompt_sorinalt_preview {
+    local +h PROMPT=''
+    local +h RPROMPT=''
+    local +h SPROMPT=''
+
+    editor-info 2>/dev/null
+    prompt_preview_theme 'sorinalt'
+  }
 }
 
-prompt_sorin_setup "$@"
+prompt_sorinalt_setup "$@"
+
+
+function zsh-git-statuses-key {
+    black='\033[0;30m'        # Black
+    red='\033[0;31m'          # Red
+    green='\033[0;32m'        # Green
+    yellow='\033[0;33m'       # Yellow
+    blue='\033[0;34m'         # Blue
+    purple='\033[0;35m'       # Purple
+    cyan='\033[0;36m'         # Cyan
+    white='\033[0;37m'        # White
+    nocolor='\033[0m'         # No Color
+
+    echo ${green}✚${nocolor} added
+    echo ${yellow}⬆${nocolor} ahead
+    echo ${yellow}⬇${nocolor} behind
+    echo ${red}✖${nocolor} deleted
+    echo ${blue}✱${nocolor} modified
+    echo ${magenta}➜${nocolor} renamed
+    echo ${cyan}✭${nocolor} stashed
+    echo ${yellow}═${nocolor} unmerged
+    echo ${white}◼${nocolor} untracked
+}

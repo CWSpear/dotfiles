@@ -2,8 +2,6 @@ source ${ZDOTDIR:-$HOME}/.zprezto/runcoms/zpreztorc
 
 # only things we need to override/add below here
 
-zstyle ':prezto:module:prompt' theme 'sorinalt'
-
 zstyle ':prezto:load' pmodule \
   'environment' \
   'terminal' \
