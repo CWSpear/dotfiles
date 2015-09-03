@@ -54,7 +54,16 @@ function dexec() {
   docker exec -it "$1" bash
 }
 
-function docker-nuke {
-  docker rm -f $(docker ps -a -q)
-  docker rmi -f $(docker images -q)
+function docker-rmrf {
+  if [[ !  -z  `docker ps -a -q`  ]]; then
+    docker rm -f `docker ps -a -q` && echo 'All containers removed'
+  else
+    echo 'No containers to remove'
+  fi
+}
+#
+# # Homestead shorcuts
+function homestead {
+  # run in a subshell so we don't change dirs
+  (cd $HOMESTEAD_VM_DIR && vagrant $@)
 }
