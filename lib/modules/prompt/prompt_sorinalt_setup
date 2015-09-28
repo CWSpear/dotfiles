@@ -57,6 +57,9 @@ function prompt_sorin_precmd {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
 
+  # set Docker Machine if env exists
+  display_docker_machine
+
   # Format PWD.
   prompt_sorin_pwd
 
@@ -72,6 +75,13 @@ function prompt_sorin_precmd {
   trap prompt_sorin_git_info WINCH
   prompt_sorin_precmd_async &!
   _prompt_sorin_precmd_async_pid=$!
+}
+
+function display_docker_machine {
+  if [ $DOCKER_MACHINE_NAME ]; then
+    zstyle -s ':prezto:module:docker:info:machine' format 'docker_machine_format'
+    zformat -f docker_machine_format "$docker_machine_format" "m:$DOCKER_MACHINE_NAME"
+  fi
 }
 
 function prompt_sorinalt_setup {
@@ -112,6 +122,9 @@ function prompt_sorinalt_setup {
     'prompt' ' $(coalesce "%b" "%p" "%c")%s' \
     'status' '%A%B%S%a%d%m%r%U%u'
 
+  zstyle ':prezto:module:docker:info' verbose 'yes'
+  zstyle ':prezto:module:docker:info:machine' format ' %F{green}[%f%F{magenta}%m%f%F{green}]%f'
+
   # environment aware symbol
   _echo_symbol="%F{white}%f"
   if [ $ZSH_PROMPT_SYMBOL ]; then
@@ -123,7 +136,7 @@ function prompt_sorinalt_setup {
   fi
 
   # Define prompts.
-  PROMPT='${_echo_symbol} %F{white}${_prompt_sorin_pwd}%f${git_info:+${(e)git_info[prompt]}}%(!. %B%F{red}#%f%b.)${editor_info[keymap]} '
+  PROMPT='${_echo_symbol} %F{white}${_prompt_sorin_pwd}%f${docker_machine_format}${git_info:+${(e)git_info[prompt]}}%(!. %B%F{red}#%f%b.)${editor_info[keymap]} '
   RPROMPT=''
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [Nyae]? '
 
