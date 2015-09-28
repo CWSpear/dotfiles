@@ -2,11 +2,6 @@ if [[ -n $SSH_CONNECTION ]]; then
   # remote stuff only
 else
   # local stuff only
-  export DOCKER_TLS_VERIFY="1"
-  export DOCKER_HOST="tcp://192.168.99.100:2376"
-  export DOCKER_CERT_PATH="${HOME}/.docker/machine/machines/ua"
-  export DOCKER_MACHINE_NAME="ua"
-
   export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 fi
 
