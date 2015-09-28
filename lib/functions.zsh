@@ -56,7 +56,7 @@ function dexec() {
 
 function docker-rmrf {
   if [[ !  -z  `docker ps -a -q`  ]]; then
-    docker rm -f `docker ps -a -q` && echo 'All containers removed'
+    docker rm -vf `docker ps -a -q` && echo 'All containers removed'
   else
     echo 'No containers to remove'
   fi
