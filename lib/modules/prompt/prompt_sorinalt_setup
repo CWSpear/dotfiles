@@ -14,6 +14,8 @@ pmodload 'helper'
 function prompt_sorin_pwd {
   local pwd="${PWD/#$HOME/~}"
 
+  pwd="${PWD/#\/Users\/cameron\/Sites\/under-armour/#ua}"
+
   _prompt_sorin_pwd=$pwd
   # uncomment below and delete above for abbrev dir
   # if [[ "$pwd" == (#m)[/~] ]]; then
