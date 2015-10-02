@@ -12,9 +12,9 @@
 pmodload 'helper'
 
 function prompt_sorin_pwd {
-  local pwd="${PWD/#$HOME/~}"
+  local pwd="${PWD/#\/Users\/cameron\/Sites\/under-armour/#/ua}"
 
-  pwd="${PWD/#\/Users\/cameron\/Sites\/under-armour/#ua}"
+  pwd="${pwd/#$HOME/~}"
 
   _prompt_sorin_pwd=$pwd
   # uncomment below and delete above for abbrev dir
