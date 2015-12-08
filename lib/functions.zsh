@@ -50,6 +50,12 @@ function uas() {
   bash ./schema/$1.sh
 }
 
+function ua-test {
+  local NAME=$(cat ./package.json | grep "\"name\":" | cut -d':' -f2 | cut -d'"' -f2)
+  local CONTAINER="docker-artifacts.ua-ecm.com/$NAME"
+  docker build -t $CONTAINER . && ua-ci $@ $CONTAINER
+}
+
 function dexec() {
   docker exec -it "$1" bash
 }
@@ -59,6 +65,12 @@ function docker-rmrf {
     docker rm -vf `docker ps -a -q` && echo 'All containers removed'
   else
     echo 'No containers to remove'
+  fi
+
+  if [[ !  -z  `docker volume ls -q`  ]]; then
+    docker volume rm `docker volume ls -q` && echo 'All volumes removed'
+  else
+    echo 'No volumes to remove'
   fi
 }
 #

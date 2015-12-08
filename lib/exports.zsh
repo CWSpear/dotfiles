@@ -3,6 +3,8 @@ if [[ -n $SSH_CONNECTION ]]; then
 else
   # local stuff only
   export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+  export DOCKER_HOST="tcp://192.168.1.23:4243"
 fi
 
 export EDITOR='vim'
