@@ -1,4 +1,4 @@
-START=`ruby -e 'puts Time.now.to_f'`
+# START=`ruby -e 'puts Time.now.to_f'`
 
 umask 022
 
@@ -34,5 +34,5 @@ source "${LIBDIR}/settings.zsh"
 [[ -e $HOME/.zshlocal ]] && source $HOME/.zshlocal
 [[ -e $HOME/.zsh/.zshlocal ]] && source $HOME/.zsh/.zshlocal
 
-END=`ruby -e 'puts Time.now.to_f'`
-echo "Time to load: $((END-START))"
+# END=`ruby -e 'puts Time.now.to_f'`
+# echo "Time to load: $((END-START))"
