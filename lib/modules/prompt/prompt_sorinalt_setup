@@ -62,6 +62,9 @@ function prompt_sorin_precmd {
   # set Docker Machine if env exists
   display_docker_machine
 
+  # display node version in the prompt
+  #display_node_version
+
   # Format PWD.
   prompt_sorin_pwd
 
@@ -84,6 +87,12 @@ function display_docker_machine {
     zstyle -s ':prezto:module:docker:info:machine' format 'docker_machine_format'
     zformat -f docker_machine_format "$docker_machine_format" "m:$DOCKER_MACHINE_NAME"
   fi
+}
+
+function display_node_version {
+  zstyle -s ':prezto:module:node:info:version' format 'node_version'
+  local version=`node --version`
+  zformat -f node_version "$node_version" "m:$version"
 }
 
 function prompt_sorinalt_setup {
@@ -127,6 +136,9 @@ function prompt_sorinalt_setup {
   zstyle ':prezto:module:docker:info' verbose 'yes'
   zstyle ':prezto:module:docker:info:machine' format ' %F{green}[%f%F{magenta}%m%f%F{green}]%f'
 
+  zstyle ':prezto:module:node:info' verbose 'yes'
+  zstyle ':prezto:module:node:info:version' format ' %F{green}[%f%F{magenta}%m%f%F{green}]%f'
+
   # environment aware symbol
   _echo_symbol="%F{white}%f"
   if [ $ZSH_PROMPT_SYMBOL ]; then
@@ -138,7 +150,7 @@ function prompt_sorinalt_setup {
   fi
 
   # Define prompts.
-  PROMPT='${_echo_symbol} %F{white}${_prompt_sorin_pwd}%f${docker_machine_format}${git_info:+${(e)git_info[prompt]}}%(!. %B%F{red}#%f%b.)${editor_info[keymap]} '
+  PROMPT='${_echo_symbol} %F{white}${_prompt_sorin_pwd}%f${docker_machine_format}${node_version}${git_info:+${(e)git_info[prompt]}}%(!. %B%F{red}#%f%b.)${editor_info[keymap]} '
   RPROMPT=''
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [Nyae]? '
 
