@@ -7,6 +7,11 @@ function vgdo() {
   eval "vagrant ssh -c \"cd /vagrant && $@\""
 }
 
+# Git Clone Directory -- clone a repo and CD into that dir!
+function gcd(){
+  git clone $1 && cd $(basename $1)
+}
+
 # "mario" user do
 function mudo() {
   PWD=`pwd`
@@ -60,6 +65,14 @@ function dexec() {
   docker exec -it "$1" bash
 }
 
+function ua-build {
+    local NAME=$(cat ./package.json | grep "\"name\":" | cut -d':' -f2 | cut -d'"' -f2)
+    local CONTAINER="docker-artifacts.ua-ecm.com/${NAME}:latest"
+    echo $CONTAINER
+    docker rmi $CONTAINER
+    docker build -t $CONTAINER .
+}
+
 function docker-rmrf {
   if [[ !  -z  `docker ps -a -q`  ]]; then
     docker rm -vf `docker ps -a -q` && echo 'All containers removed'
@@ -73,7 +86,23 @@ function docker-rmrf {
     echo 'No volumes to remove'
   fi
 }
-#
+
+function dnpm() {
+  if [[ ! $DNPM_VERSION ]]; then
+    local current=`node --version`
+    DNPM_VERSION="${current/v/}"
+  fi
+
+  echo Running npm $@ with Node $DNPM_VERSION
+
+  docker run -i \
+    -v `pwd`:/src \
+    -w /src \
+    --entrypoint /usr/local/bin/npm \
+    node:$version \
+      $@
+}
+
 # # Homestead shorcuts
 function homestead {
   # run in a subshell so we don't change dirs
