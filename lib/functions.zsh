@@ -70,7 +70,7 @@ function ua-build {
     local CONTAINER="docker-artifacts.ua-ecm.com/${NAME}:latest"
     echo $CONTAINER
     docker rmi $CONTAINER
-    docker build -t $CONTAINER .
+    docker build --pull -t $CONTAINER .
 }
 
 function docker-rmrf {

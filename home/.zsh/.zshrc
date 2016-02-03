@@ -34,5 +34,8 @@ source "${LIBDIR}/settings.zsh"
 [[ -e $HOME/.zshlocal ]] && source $HOME/.zshlocal
 [[ -e $HOME/.zsh/.zshlocal ]] && source $HOME/.zsh/.zshlocal
 
+# manually added completions
+fpath=(${LIBDIR}/completions $fpath)
+
 # END=`ruby -e 'puts Time.now.to_f'`
 # echo "Time to load: $((END-START))"

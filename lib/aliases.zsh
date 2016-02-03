@@ -8,6 +8,11 @@ alias morecolor='more -R'
 
 alias lsa='ls -lah'
 
+# note this overrides dc (desk calculator)
+alias dc="docker-compose"
+alias dm="docker-machine"
+alias drm="docker-rmrf"
+
 alias vudo=vgdo
 
 alias mblt='lt --host "http://tunnel.matchbooklab.com"'

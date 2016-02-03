@@ -12,7 +12,10 @@
 pmodload 'helper'
 
 function prompt_sorin_pwd {
-  local pwd="${PWD/#\/Users\/cameron\/Sites\/under-armour/#/ua}"
+  local pwd="$PWD"
+  pwd="${pwd/#\/Users\/cameron\/Projects\/under-armour/#/ua}"
+  pwd="${pwd/#\/Users\/cameron\/Projects\/surge/#/surge}"
+  pwd="${pwd/#\/Users\/cameron\/Projects\/github/#/github}"
 
   pwd="${pwd/#$HOME/~}"
 
@@ -63,7 +66,7 @@ function prompt_sorin_precmd {
   display_docker_machine
 
   # display node version in the prompt
-  #display_node_version
+  display_node_version
 
   # Format PWD.
   prompt_sorin_pwd
@@ -83,7 +86,7 @@ function prompt_sorin_precmd {
 }
 
 function display_docker_machine {
-  if [ $DOCKER_MACHINE_NAME ]; then
+  if [[ $DOCKER_MACHINE_NAME && $DOCKER_MACHINE_NAME != 'goomba' ]]; then
     zstyle -s ':prezto:module:docker:info:machine' format 'docker_machine_format'
     zformat -f docker_machine_format "$docker_machine_format" "m:$DOCKER_MACHINE_NAME"
   fi
@@ -134,10 +137,10 @@ function prompt_sorinalt_setup {
     'status' '%A%B%S%a%d%m%r%U%u'
 
   zstyle ':prezto:module:docker:info' verbose 'yes'
-  zstyle ':prezto:module:docker:info:machine' format ' %F{green}[%f%F{magenta}%m%f%F{green}]%f'
+  zstyle ':prezto:module:docker:info:machine' format ' %F{red}[%f%F{blue}%m%f%F{red}]%f'
 
   zstyle ':prezto:module:node:info' verbose 'yes'
-  zstyle ':prezto:module:node:info:version' format ' %F{green}[%f%F{magenta}%m%f%F{green}]%f'
+  zstyle ':prezto:module:node:info:version' format ' %F{yellow}[%f%F{cyan}%m%f%F{yellow}]%f'
 
   # environment aware symbol
   _echo_symbol="%F{white}%f"
