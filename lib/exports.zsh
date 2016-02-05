@@ -1,18 +1,24 @@
+export EDITOR='vim'
+export VISUAL='vim'
+
 if [[ -n $SSH_CONNECTION ]]; then
   # remote stuff only
 else
   # local stuff only
+  export VISUAL='atom'
+
   export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
   export DOCKER_HOST="tcp://192.168.1.23:4243"
 fi
 
-export EDITOR='vim'
-
 export HISTFILE="${HOME}/.zsh_history"
 
 # node npm
 export PATH=${PATH}:/usr/local/share/npm/bin
+
+# go
+export PATH=${PATH}:/usr/local/opt/go/libexec/bin
 
 # homebrew
 export PATH=${PATH}:/usr/local/bin

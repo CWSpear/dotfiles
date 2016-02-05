@@ -108,3 +108,7 @@ function homestead {
   # run in a subshell so we don't change dirs
   (cd $HOMESTEAD_VM_DIR && vagrant $@)
 }
+
+# function go {
+#     docker run --rm -v /go/bin/:/go/bin/ -v `pwd`:/go/src -w /go/src golang $@
+# }
