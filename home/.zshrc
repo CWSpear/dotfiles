@@ -9,9 +9,6 @@ export LIBDIR="$HOME/.homesick/repos/dotfiles/lib"
 source $HOME/.homesick/repos/homeshick/homeshick.sh
 fpath=(/usr/local/share/zsh/site-functions $fpath)
 
-# allow my custom modules to be used
-fpath=(${LIBDIR}/modules/prompt $fpath)
-
 [[ -e $HOME/.zshlocalsetup ]] && source $HOME/.zshlocalsetup
 [[ -e $HOME/.zsh/.zshlocalsetup ]] && source $HOME/.zsh/.zshlocalsetup
 
