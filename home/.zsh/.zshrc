@@ -5,9 +5,9 @@ umask 022
 # mission critical vars
 export LIBDIR="$HOME/.homesick/repos/dotfiles/lib"
 
-# Load homeshick function and zsh completion.
+# Load homeshick function and brew zsh completion.
 source $HOME/.homesick/repos/homeshick/homeshick.sh
-fpath=($HOME/.homesick/repos/homeshick/completions $fpath)
+fpath=(/usr/local/share/zsh/site-functions $fpath)
 
 # allow my custom modules to be used
 fpath=(${LIBDIR}/modules/prompt $fpath)
