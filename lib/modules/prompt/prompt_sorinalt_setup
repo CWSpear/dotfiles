@@ -94,6 +94,7 @@ function display_docker_machine {
 }
 
 function display_node_version {
+  node --version > /dev/null 2>&1 || return
   zstyle -s ':prezto:module:node:info:version' format 'node_version'
   local version=`node --version`
   zformat -f node_version "$node_version" "m:$version"
