@@ -18,6 +18,8 @@ export HISTFILE="${HOME}/.zsh_history"
 export PATH=${PATH}:/usr/local/share/npm/bin
 
 # go
+export GOPATH=$HOME/Projects/.gopath
+export PATH=${PATH}:/${GOPATH}/bin
 export PATH=${PATH}:/usr/local/opt/go/libexec/bin
 
 # homebrew

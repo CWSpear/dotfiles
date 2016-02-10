@@ -59,6 +59,7 @@ function prompt_sorin_precmd_async {
 }
 
 function prompt_sorin_precmd {
+  printf "\n"
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
 
@@ -113,7 +114,7 @@ function prompt_sorinalt_setup {
 
   # Set editor-info parameters.
   zstyle ':prezto:module:editor:info:completing' format '%B%F{yellow}...%f%b'
-  zstyle ':prezto:module:editor:info:keymap:primary' format ' %B%F{red}❯%F{yellow}❯%F{green}❯%f%b'
+  zstyle ':prezto:module:editor:info:keymap:primary' format '%B%F{red}❯%F{yellow}❯%F{green}❯%f%b'
   zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format ' %F{red}♺%f'
   zstyle ':prezto:module:editor:info:keymap:alternate' format ' %B%F{green}❮%F{yellow}❮%F{red}❮%f%b'
 
@@ -153,7 +154,7 @@ function prompt_sorinalt_setup {
   fi
 
   # Define prompts.
-  PROMPT='${_echo_symbol} %F{white}${_prompt_sorin_pwd}%f${docker_machine_format}${node_version}${git_info:+${(e)git_info[prompt]}}%(!. %B%F{red}#%f%b.)${editor_info[keymap]} '
+  PROMPT='${_echo_symbol} %F{white}${_prompt_sorin_pwd}%f${docker_machine_format}${node_version}${git_info:+${(e)git_info[prompt]}}%(!. %B%F{red}#%f%b.)'$'\n''${editor_info[keymap]} '
   RPROMPT=''
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [Nyae]? '
 
