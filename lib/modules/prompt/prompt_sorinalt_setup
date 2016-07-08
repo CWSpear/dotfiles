@@ -87,7 +87,7 @@ function prompt_sorin_precmd {
 }
 
 function display_docker_machine {
-  if [[ $DOCKER_MACHINE_NAME && $DOCKER_MACHINE_NAME != 'goomba' ]]; then
+  if [[ $DOCKER_MACHINE_NAME ]]; then
     zstyle -s ':prezto:module:docker:info:machine' format 'docker_machine_format'
     zformat -f docker_machine_format "$docker_machine_format" "m:$DOCKER_MACHINE_NAME"
   fi

@@ -8,8 +8,6 @@ else
   export VISUAL='atom'
 
   export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-
-  export DOCKER_HOST="tcp://192.168.1.23:4243"
 fi
 
 export HISTFILE="${HOME}/.zsh_history"

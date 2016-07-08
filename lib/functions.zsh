@@ -74,16 +74,25 @@ function ua-build {
 }
 
 function docker-rmrf {
-  if [[ !  -z  `docker ps -a -q`  ]]; then
-    docker rm -vf `docker ps -a -q` && echo 'All containers removed'
-  else
-    echo 'No containers to remove'
-  fi
+  # add protection from running this when connected to a docker-machine other than goomba
+  MACHINE=`docker-machine active 2> /dev/null`
 
-  if [[ !  -z  `docker volume ls -q`  ]]; then
-    docker volume rm `docker volume ls -q` && echo 'All volumes removed'
+  if [[ $MACHINE != 'goomba' && $MACHINE != '' ]]; then
+    echo "[ERR] Will not run command while connected to [$MACHINE]"
   else
-    echo 'No volumes to remove'
+    LOCAL_PERSIST=`docker ps -qf "name=local-persist"`
+
+    if [[ !  -z  `docker ps -a -q`  ]]; then
+      docker rm -vf `docker ps -a -q` && echo 'All containers removed'
+    else
+      echo 'No containers to remove'
+    fi
+
+    if [[ !  -z  `docker volume ls -q`  ]]; then
+      docker volume rm `docker volume ls -q` && echo 'All volumes removed'
+    else
+      echo 'No volumes to remove'
+    fi
   fi
 }
 
@@ -101,6 +110,11 @@ function dnpm() {
     --entrypoint /usr/local/bin/npm \
     node:$version \
       $@
+}
+
+function nvm-init {
+    export NVM_DIR="$HOME/.nvm"
+    . "$(brew --prefix nvm)/nvm.sh"
 }
 
 # # Homestead shorcuts
