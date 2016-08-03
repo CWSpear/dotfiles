@@ -19,7 +19,7 @@ set encoding=utf8
 set ffs=unix,dos,mac
 
 " set our tabs to 4 spaces
-set ts=4
+set tabstop=4 shiftwidth=4 expandtab
 
 " turn syntax highlighting on by default
 syntax on

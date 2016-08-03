@@ -97,7 +97,7 @@ function docker-rmrf {
 }
 
 function dnpm() {
-  if [[ ! $DNPM_VERSION ]]; then
+  if [ -n "$DNPM_VERSION" ]; then
     local current=`node --version`
     DNPM_VERSION="${current/v/}"
   fi
