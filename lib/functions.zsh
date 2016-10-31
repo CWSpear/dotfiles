@@ -77,11 +77,14 @@ function docker-rmrf {
   # add protection from running this when connected to a docker-machine other than goomba
   MACHINE=`docker-machine active 2> /dev/null`
 
-  if [[ $MACHINE != 'goomba' && $MACHINE != '' ]]; then
+  if [[ $MACHINE != 'hammer-bro' && $MACHINE != '' ]]; then
     echo "[ERR] Will not run command while connected to [$MACHINE]"
   else
-    LOCAL_PERSIST=`docker ps -qf "name=local-persist"`
+    # LOCAL_PERSIST=`docker ps -qf "name=local-persist"`
 
+    # if [[ !  -z  `docker ps -a -q | grep -v $LOCAL_PERSIST`  ]]; then
+      # docker rm -vf `docker ps -a -q | grep -v $LOCAL_PERSIST` && echo 'All containers removed'
+      
     if [[ !  -z  `docker ps -a -q`  ]]; then
       docker rm -vf `docker ps -a -q` && echo 'All containers removed'
     else
@@ -123,6 +126,29 @@ function homestead {
   (cd $HOMESTEAD_VM_DIR && vagrant $@)
 }
 
+function docker-local-persist {
+    docker rm --force local-persist
+    docker run -d --restart always \
+        -v /run/docker/plugins/:/run/docker/plugins/ \
+        -v /data/plugin-data/:/var/lib/docker/plugin-data/ \
+        -v /data/:/data/ \
+        --name local-persist \
+            cwspear/docker-local-persist-volume-plugin
+}
+
 # function go {
 #     docker run --rm -v /go/bin/:/go/bin/ -v `pwd`:/go/src -w /go/src golang $@
 # }
+
+function jira() {
+  TICKET=$1
+  if [[ $TICKET == '' ]]; then
+    TICKET=`git rev-parse --abbrev-ref HEAD | cut -d - -f 1-2`
+  fi
+
+  URL="https://underarmour.atlassian.net/browse/$TICKET"
+
+  echo "Opening $URL..."
+
+  open "$URL"
+}
