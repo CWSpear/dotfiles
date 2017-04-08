@@ -15,6 +15,7 @@ function prompt_sorin_pwd {
   local pwd="$PWD"
   pwd="${pwd/#\/Users\/cameron\/Projects\/under-armour/#/ua}"
   pwd="${pwd/#\/Users\/cameron\/Projects\/surge/#/surge}"
+  pwd="${pwd/#\/Users\/cameron\/Projects\/momentum-design-lab/#/mdl}"
   pwd="${pwd/#\/Users\/cameron\/Projects\/github/#/github}"
 
   pwd="${pwd/#$HOME/~}"
