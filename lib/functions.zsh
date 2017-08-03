@@ -80,18 +80,23 @@ function docker-rmrf {
   if [[ $MACHINE != 'hammer-bro' && $MACHINE != '' ]]; then
     echo "[ERR] Will not run command while connected to [$MACHINE]"
   else
-    # LOCAL_PERSIST=`docker ps -qf "name=local-persist"`
-
-    # if [[ !  -z  `docker ps -a -q | grep -v $LOCAL_PERSIST`  ]]; then
-      # docker rm -vf `docker ps -a -q | grep -v $LOCAL_PERSIST` && echo 'All containers removed'
-      
     if [[ !  -z  `docker ps -a -q`  ]]; then
-      docker rm -vf `docker ps -a -q` && echo 'All containers removed'
+      docker rm -vf `docker ps -a -q` && echo 'All containers removed\n'
     else
-      echo 'No containers to remove'
+      echo 'No containers to remove\n'
     fi
 
-    docker system prune -f
+    if [[ !  -z  `docker volume ls -q`  ]]; then
+      docker volume prune -f && echo 'All volumes removed\n'
+    else
+      echo 'No volumes to remove\n'
+    fi
+
+    if [[ !  -z  `docker network ls -q`  ]]; then
+      docker network prune -f && echo 'All networks removed\n'
+    else
+      echo 'No networks to remove\n'
+    fi
   fi
 }
 
