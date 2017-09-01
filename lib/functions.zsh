@@ -75,13 +75,14 @@ function ua-build {
 
 function docker-rmrf {
   # add protection from running this when connected to a docker-machine other than goomba
-  MACHINE=`docker-machine active 2> /dev/null`
+  # MACHINE=`docker-machine active 2> /dev/null`
+  MACHINE=$DOCKER_MACHINE_NAME
 
   if [[ $MACHINE != 'hammer-bro' && $MACHINE != '' ]]; then
     echo "[ERR] Will not run command while connected to [$MACHINE]"
   else
-    if [[ !  -z  `docker ps -a -q`  ]]; then
-      docker rm -vf `docker ps -a -q` && echo 'All containers removed\n'
+    if [[ !  -z  `docker container ls -a -q`  ]]; then
+      docker container rm -vf `docker container ls -a -q` && echo 'All containers removed\n'
     else
       echo 'No containers to remove\n'
     fi
@@ -97,6 +98,10 @@ function docker-rmrf {
     else
       echo 'No networks to remove\n'
     fi
+
+    # just to be sure
+    docker system prune -f
+    killall docker-compose
   fi
 }
 
