@@ -158,3 +158,10 @@ function jira() {
 
   open "$URL"
 }
+
+function mcp() {
+  for file in "$@"
+  do
+    scp "$file" lakitu.local:/Volumes/Ice/Movies
+  done
+}
