@@ -151,7 +151,7 @@ function prompt_sorinalt_setup {
   if [ $ZSH_PROMPT_SYMBOL ]; then
     _echo_symbol=$ZSH_PROMPT_SYMBOL
   elif [ $SSH_TTY ]; then
-    _echo_symbol="⭐️%F{cyan}[%f%F{blue}%n%f%F{cyan}@%f%F{yellow}%m%f%F{cyan}]%f"
+    _echo_symbol="⭐️ %F{cyan}[%f%F{blue}%n%f%F{cyan}@%f%F{yellow}%m%f%F{cyan}]%f"
   elif [ $ZSH_DOCKER_DEV ]; then
     _echo_symbol="🐳"
   fi
