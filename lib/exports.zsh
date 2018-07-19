@@ -5,9 +5,7 @@ if [[ -n $SSH_CONNECTION ]]; then
   # remote stuff only
 else
   # local stuff only
-  export VISUAL='atom'
-
-  export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+  export VISUAL='subl'
 fi
 
 export HISTFILE="${HOME}/.zsh_history"

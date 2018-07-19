@@ -23,8 +23,5 @@ alias cwst='lt --host "http://tunnel.cameronspear.com"'
 alias j="fasd_cd -d"
 alias ji="fasd_cd -i"
 
-alias ua-kube="/Users/cameron/Projects/under-armour/team-kube/kubectl.sh"
-alias ua-env-proxy="/Users/cameron/Projects/under-armour/team-kube/env-proxy.sh"
-
 # unalias things from prezto that conflict!
 unalias lt # local tunnel

@@ -15,10 +15,6 @@ fpath=(${LIBDIR}/modules/prompt $fpath)
 [[ -e $HOME/.zshlocalsetup ]] && source $HOME/.zshlocalsetup
 [[ -e $HOME/.zsh/.zshlocalsetup ]] && source $HOME/.zsh/.zshlocalsetup
 
-# only source it is it exists (i.e. probably only local)
-# [[ -e ~/.phpbrew/bashrc ]] && source ~/.phpbrew/bashrc
-# [[ -e ~/.nvm/nvm.sh ]] && source ~/.nvm/nvm.sh
-
 # for iterm shell integration
 [[ -e ~/.iterm2_shell_integration.zsh ]] && source ~/.iterm2_shell_integration.zsh
 
@@ -28,7 +24,6 @@ source ${ZDOTDIR:-$HOME}/.zprezto/runcoms/zshrc
 source "${LIBDIR}/exports.zsh"
 source "${LIBDIR}/functions.zsh"
 source "${LIBDIR}/aliases.zsh"
-# source "${LIBDIR}/autocompletes.zsh"
 source "${LIBDIR}/settings.zsh"
 
 [[ -e $HOME/.zshlocal ]] && source $HOME/.zshlocal

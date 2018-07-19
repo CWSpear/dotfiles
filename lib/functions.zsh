@@ -3,20 +3,11 @@ function mkcd() {
   mkdir -p "$@" && cd "$@"
 }
 
-function vgdo() {
-  eval "vagrant ssh -c \"cd /vagrant && $@\""
-}
-
 # Git Clone Directory -- clone a repo and CD into that dir!
 function gcd(){
   git clone $1 && cd $(basename $1)
 }
 
-# "mario" user do
-function mudo() {
-  PWD=`pwd`
-  eval "ssh mario.local \"cd $PWD && $@\""
-}
 
 # do a Matrix movie effect of falling characters
 function matrix() {
@@ -45,33 +36,10 @@ function manp() {
   man -t $1 | open -f -a /Applications/Preview.app
 }
 
-# Under Armour Deploy scripts shortcut
-function uad() {
-  bash ./deploy/$1.sh
-}
-
-# Under Armour Schema scripts shortcut
-function uas() {
-  bash ./schema/$1.sh
-}
-
-function ua-test {
-  local NAME=$(cat ./package.json | grep "\"name\":" | cut -d':' -f2 | cut -d'"' -f2)
-  local CONTAINER="docker-artifacts.ua-ecm.com/$NAME"
-  docker build -t $CONTAINER . && ua-ci $@ $CONTAINER
-}
-
 function dexec() {
   docker exec -it "$1" bash
 }
 
-function ua-build {
-    local NAME=$(cat ./package.json | grep "\"name\":" | cut -d':' -f2 | cut -d'"' -f2)
-    local CONTAINER="docker-artifacts.ua-ecm.com/${NAME}:latest"
-    echo $CONTAINER
-    docker rmi $CONTAINER
-    docker build --pull -t $CONTAINER .
-}
 
 function docker-rmrf {
   # add protection from running this when connected to a docker-machine other than goomba
@@ -121,10 +89,6 @@ function dnpm() {
       $@
 }
 
-function nvm-init {
-    export NVM_DIR="$HOME/.nvm"
-    . "$(brew --prefix nvm)/nvm.sh"
-}
 
 # # Homestead shorcuts
 function homestead {
@@ -146,18 +110,6 @@ function docker-local-persist {
 #     docker run --rm -v /go/bin/:/go/bin/ -v `pwd`:/go/src -w /go/src golang $@
 # }
 
-function jira() {
-  TICKET=$1
-  if [[ $TICKET == '' ]]; then
-    TICKET=`git rev-parse --abbrev-ref HEAD | cut -d - -f 1-2`
-  fi
-
-  URL="https://underarmour.atlassian.net/browse/$TICKET"
-
-  echo "Opening $URL..."
-
-  open "$URL"
-}
 
 function mcp() {
   for file in "$@"
