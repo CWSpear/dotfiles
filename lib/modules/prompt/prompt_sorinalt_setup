@@ -37,7 +37,7 @@ function prompt_sorin_git_info {
     if [[ -s "$_prompt_sorin_precmd_async_data" ]]; then
       alias typeset='typeset -g'
       source "$_prompt_sorin_precmd_async_data"
-      RPROMPT+='${git_info:+${(e)git_info[status]}}'
+      # RPROMPT+='${git_info:+${(e)git_info[status]}}'
       unalias typeset
     fi
 
@@ -75,7 +75,7 @@ function prompt_sorin_precmd {
   prompt_sorin_pwd
 
   # Define prompts.
-  RPROMPT='${editor_info[overwrite]}%(?:: %F{1}⏎%f)${VIM:+" %B%F{6}V%f%b"}'
+  # RPROMPT='${editor_info[overwrite]}%(?:: %F{1}⏎%f)${VIM:+" %B%F{6}V%f%b"}'
 
   # Kill the old process of slow commands if it is still running.
   if (( _prompt_sorin_precmd_async_pid > 0 )); then
@@ -110,10 +110,14 @@ function prompt_sorinalt_setup {
   _prompt_sorin_precmd_async_data="${TMPPREFIX}-prompt_sorin_data"
 
   # Load required functions.
-  autoload -Uz add-zsh-hook
+ autoload -Uz async && async
+ autoload -Uz add-zsh-hook
 
   # Add hook for calling git-info before each command.
   add-zsh-hook precmd prompt_sorin_precmd
+
+  # Tell prezto we can manage this prompt
+  zstyle ':prezto:module:prompt' managed 'yes'
 
   # Set editor-info parameters.
   zstyle ':prezto:module:editor:info:completing' format '%B%F{yellow}...%f%b'
@@ -147,7 +151,7 @@ function prompt_sorinalt_setup {
   zstyle ':prezto:module:node:info:version' format ' %F{yellow}[%f%F{cyan}%m%f%F{yellow}]%f'
 
   # environment aware symbol
-  _echo_symbol="🚀"
+  _echo_symbol="🔥"
   if [ $ZSH_PROMPT_SYMBOL ]; then
     _echo_symbol=$ZSH_PROMPT_SYMBOL
   elif [ $SSH_TTY ]; then
@@ -157,7 +161,7 @@ function prompt_sorinalt_setup {
   fi
 
   # Define prompts.
-  PROMPT='${_echo_symbol} %F{white}${_prompt_sorin_pwd}%f${docker_machine_format}${node_version}${git_info:+${(e)git_info[prompt]}}%(!. %B%F{red}#%f%b.)'$'\n''${editor_info[keymap]} '
+  PROMPT='${_echo_symbol} %F{white}${_prompt_sorin_pwd}%f${docker_machine_format}${node_version}${git_info:+${(e)git_info[prompt]}}%(!. %B%F{red}#%f%b.)''${git_info:+${(e)git_info[status]}}''${editor_info[overwrite]}%(?:: %F{1}⏎%f)${VIM:+" %B%F{6}V%f%b"}'$'\n''${editor_info[keymap]} '
   RPROMPT=''
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [Nyae]? '
 

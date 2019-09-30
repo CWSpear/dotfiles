@@ -34,3 +34,6 @@ fpath=(${LIBDIR}/completions $fpath)
 
 # END=`ruby -e 'puts Time.now.to_f'`
 # echo "Time to load: $((END-START))"
+
+# To customize prompt, run `p10k configure` or edit ~/.zsh/.p10k.zsh.
+[[ -f ~/.zsh/.p10k.zsh ]] && source ~/.zsh/.p10k.zsh

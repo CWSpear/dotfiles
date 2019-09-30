@@ -46,7 +46,7 @@ function docker-rmrf {
   # MACHINE=`docker-machine active 2> /dev/null`
   MACHINE=$DOCKER_MACHINE_NAME
 
-  if [[ $MACHINE != 'hammer-bro' && $MACHINE != '' ]]; then
+  if [[ $MACHINE != 'wario' && $MACHINE != '' ]]; then
     echo "[ERR] Will not run command while connected to [$MACHINE]"
   else
     if [[ !  -z  `docker container ls -a -q`  ]]; then
@@ -56,7 +56,7 @@ function docker-rmrf {
     fi
 
     if [[ !  -z  `docker volume ls -q`  ]]; then
-      docker volume prune -f && echo 'All volumes removed\n'
+      docker volume rm -f `docker volume ls -q` && echo 'All volumes removed\n'
     else
       echo 'No volumes to remove\n'
     fi
