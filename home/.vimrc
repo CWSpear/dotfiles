@@ -24,6 +24,7 @@ set tabstop=4 shiftwidth=4 expandtab
 " turn syntax highlighting on by default
 syntax on
 filetype plugin indent on
+set autoindent
 
 " set auto-indenting on for programming
 set ai

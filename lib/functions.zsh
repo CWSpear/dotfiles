@@ -23,12 +23,11 @@ function matrix3() {
 }
 
 function find.name() {
-  wild=\'\*$1\*\'
-  sh -c "find . -iname $wild"
+  fd "$1"
 }
 
 function find.contents() {
-  grep -Ril "$1" .
+  ag "$1" .
 }
 
 # Use Mac OSX Preview to open a man page in a more handsome format
