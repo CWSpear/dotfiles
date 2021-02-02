@@ -23,11 +23,24 @@ function matrix3() {
 }
 
 function find.name() {
-  fd "$1"
+  if ! type "fd" > /dev/null 2>&1; then
+    echo No fd, falling back to find
+    wild=\'\*$1\*\'
+    sh -c "find . -iname $wild"
+    echo No fd, fell back to find
+  else
+    fd "$1"
+  fi
 }
 
 function find.contents() {
-  ag "$1" .
+  if ! type "ag" > /dev/null 2>&1; then
+    echo No ag, falling back to grep
+    grep -Ril "$1" .
+    echo No ag, fell back to grep
+  else
+    ag "$1" .
+  fi
 }
 
 # Use Mac OSX Preview to open a man page in a more handsome format
