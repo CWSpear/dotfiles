@@ -2,24 +2,28 @@ source ${ZDOTDIR:-$HOME}/.zprezto/runcoms/zpreztorc
 
 # only things we need to override/add below here
 
+#  'autosuggestions' \
 zstyle ':prezto:load' pmodule \
-  'environment' \
-  'terminal' \
-  'editor' \
-  'history' \
-  'directory' \
-  'spectrum' \
-  'utility' \
+  'archive' \
+  'command-not-found' \
   'completion' \
+  'directory' \
+  'editor' \
+  'environment' \
   'fasd' \
-  'syntax-highlighting' \
-  'history-substring-search' \
-  'osx' \
-  'homebrew' \
   'git' \
-  'prompt'
+  'history' \
+  'history-substring-search' \
+  'homebrew' \
+  'osx' \
+  'prompt' \
+  'spectrum' \
+  'ssh' \
+  'syntax-highlighting' \
+  'terminal' \
+  'utility'
 
 zstyle ':prezto:module:history-substring-search:color' found 'bg=blue,fg=white,bold'
 
 zstyle ':prezto:module:prompt' theme 'sorinalt'
-# zstyle ':prezto:module:prompt' theme 'powerlevel10k'
+#zstyle ':prezto:module:prompt' theme 'powerlevel10k'

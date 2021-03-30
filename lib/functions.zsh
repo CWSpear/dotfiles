@@ -29,7 +29,7 @@ function find.name() {
     sh -c "find . -iname $wild"
     echo No fd, fell back to find
   else
-    fd "$1"
+    fd "$@"
   fi
 }
 
@@ -39,7 +39,7 @@ function find.contents() {
     grep -Ril "$1" .
     echo No ag, fell back to grep
   else
-    ag "$1" .
+    ag "$@" .
   fi
 }
 
