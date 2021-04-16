@@ -34,12 +34,12 @@ function find.name() {
 }
 
 function find.contents() {
-  if ! type "ag" > /dev/null 2>&1; then
-    echo No ag, falling back to grep
+  if ! type "rg" > /dev/null 2>&1; then
+    echo No rg, falling back to grep
     grep -Ril "$1" .
-    echo No ag, fell back to grep
+    echo No rg, fell back to grep
   else
-    ag "$@" .
+    rg "$@" .
   fi
 }
 
