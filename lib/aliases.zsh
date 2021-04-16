@@ -26,6 +26,6 @@ alias ji="fasd_cd -i"
 # unalias things from prezto that conflict!
 unalias lt # local tunnel
 
-if ! type "bat" > /dev/null 2>&1; then
+if type "bat" > /dev/null 2>&1; then
   alias cat='bat --paging=never --style=plain'
 fi
