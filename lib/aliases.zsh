@@ -9,10 +9,11 @@ alias morecolor='more -R'
 alias lsa='ls -lah'
 
 # note this overrides dc (desk calculator)
-alias dc="docker-compose"
-alias dcp="docker-compose -f docker-compose.yml -f docker-compose.production.yml"
+alias dc="docker compose"
+alias dcp="docker compose -f docker-compose.yml -f docker-compose.production.yml"
 alias dm="docker-machine"
 alias drm="docker-rmrf"
+alias dcon="docker context use"
 
 alias vudo=vgdo
 

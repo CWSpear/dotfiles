@@ -66,8 +66,8 @@ function prompt_sorin_precmd {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
 
-  # set Docker Machine if env exists
-  display_docker_machine
+  # set Docker Machine/Context if it exists
+  display_docker_machine_or_context
 
   # display node version in the prompt
   display_node_version
@@ -89,10 +89,15 @@ function prompt_sorin_precmd {
   _prompt_sorin_precmd_async_pid=$!
 }
 
-function display_docker_machine {
+function display_docker_machine_or_context {
+  DOCKER_CONTEXT="$(docker context show)"
   if [ -n "$DOCKER_MACHINE_NAME" ]; then
-    zstyle -s ':prezto:module:docker:info:machine' format 'docker_machine_format'
-    zformat -f docker_machine_format "$docker_machine_format" "m:$DOCKER_MACHINE_NAME"
+    zstyle -s ':prezto:module:docker:info:machine' format 'docker_machine_or_context_format'
+    zformat -f docker_machine_or_context_format "$docker_machine_or_context_format" "m:$DOCKER_MACHINE_NAME"
+  # elif [ -n "$DOCKER_CONTEXT" ] && [ "$DOCKER_CONTEXT" != "default" ]; then
+  elif [ -n "$DOCKER_CONTEXT" ]; then
+    zstyle -s ':prezto:module:docker:info:context' format 'docker_machine_or_context_format'
+    zformat -f docker_machine_or_context_format "$docker_machine_or_context_format" "m:$DOCKER_CONTEXT"
   fi
 }
 
@@ -148,6 +153,8 @@ function prompt_sorinalt_setup {
   zstyle ':prezto:module:docker:info' verbose 'yes'
   zstyle ':prezto:module:docker:info:machine' format ' %F{red}[%f%F{blue}%m%f%F{red}]%f'
 
+  zstyle ':prezto:module:docker:info:context' format ' %F{red}|%f%F{blue}%m%f%F{red}|%f'
+
   zstyle ':prezto:module:node:info' verbose 'yes'
   zstyle ':prezto:module:node:info:version' format ' %F{yellow}[%f%F{cyan}%m%f%F{yellow}]%f'
 
@@ -162,7 +169,7 @@ function prompt_sorinalt_setup {
   fi
 
   # Define prompts.
-  PROMPT='${_echo_symbol} %F{white}${_prompt_sorin_pwd}%f${docker_machine_format}${node_version}${git_info:+${(e)git_info[prompt]}}%(!. %B%F{red}#%f%b.)''${git_info:+${(e)git_info[status]}}''${editor_info[overwrite]}%(?:: %F{1}⏎%f)${VIM:+" %B%F{6}V%f%b"}'$'\n''${editor_info[keymap]} '
+  PROMPT='${_echo_symbol} %F{white}${_prompt_sorin_pwd}%f${docker_machine_or_context_format}${node_version}${git_info:+${(e)git_info[prompt]}}%(!. %B%F{red}#%f%b.)''${git_info:+${(e)git_info[status]}}''${editor_info[overwrite]}%(?:: %F{1}⏎%f)${VIM:+" %B%F{6}V%f%b"}'$'\n''${editor_info[keymap]} '
   RPROMPT=''
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [Nyae]? '
 

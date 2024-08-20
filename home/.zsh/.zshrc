@@ -52,3 +52,10 @@ if (( $+commands[direnv] )); then
   eval "$(direnv hook zsh)"
 fi
 
+
+# fnm
+FNM_PATH="/Users/cwspear/Library/Application Support/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="/Users/cwspear/Library/Application Support/fnm:$PATH"
+  eval "`fnm env`"
+fi
