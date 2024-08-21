@@ -129,3 +129,11 @@ function mcp() {
     scp "$file" lakitu.local:/Volumes/Ice/Movies
   done
 }
+
+function find-up() {
+  path=$(pwd)
+  while [[ "$path" != "" && ! -e "$path/$1" ]]; do
+    path=${path%/*}
+  done
+  echo "$path"
+}

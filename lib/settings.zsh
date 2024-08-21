@@ -45,4 +45,21 @@ bindkey -s "^[OQ" "/"
 bindkey -s "^[OR" "*"
 bindkey -s "^[OS" "-"
 bindkey -s "^[Ol" "+"
-# END Keypad 
+# END Keypad
+
+autoload -U add-zsh-hook
+
+auto-dockercontext() {
+  dockercontext_path=$(find-up .dockercontext | tr -d '[:space:]')
+
+  if [ -n "$dockercontext_path" ]; then
+    dockercontext=`cat $dockercontext_path/.dockercontext`
+    docker context use $dockercontext
+  else
+    echo "Reverting to docker context default version"
+    docker context use default
+  fi
+}
+
+add-zsh-hook chpwd auto-dockercontext
+auto-dockercontext
