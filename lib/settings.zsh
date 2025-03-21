@@ -55,9 +55,10 @@ auto-dockercontext() {
   if [ -n "$dockercontext_path" ]; then
     dockercontext=`cat $dockercontext_path/.dockercontext`
     docker context use $dockercontext
+    export DOCKER_CONTEXT="$dockercontext"
   else
     echo "Reverting to docker context default version"
-    docker context use default
+    export DOCKER_CONTEXT="default"
   fi
 }
 

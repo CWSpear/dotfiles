@@ -130,6 +130,11 @@ function mcp() {
   done
 }
 
+function dcon() {
+  docker context use "$1"
+  export DOCKER_CONTEXT="$1"
+}
+
 function find-up() {
   path=$(pwd)
   while [[ "$path" != "" && ! -e "$path/$1" ]]; do

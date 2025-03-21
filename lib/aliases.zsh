@@ -13,7 +13,6 @@ alias dc="docker compose"
 alias dcp="docker compose -f docker-compose.yml -f docker-compose.production.yml"
 alias dm="docker-machine"
 alias drm="docker-rmrf"
-alias dcon="docker context use"
 
 alias vudo=vgdo
 
