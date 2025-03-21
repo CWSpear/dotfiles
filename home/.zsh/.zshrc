@@ -64,3 +64,8 @@ fpath=(/Users/cwspear/.docker/completions $fpath)
 autoload -Uz compinit
 compinit
 # End of Docker CLI completions
+
+if (( $+commands[starship] )); then
+  # starship (replaces zsh thing)
+  eval "$(starship init zsh)"
+fi
