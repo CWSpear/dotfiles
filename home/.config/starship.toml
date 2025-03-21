@@ -1,10 +1,11 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
+# $username\
+# $homename\
 
 format = """
 [](color_orange)\
 [$os ](bg:color_orange)\
-$username\
 $hostname\
 [](bg:color_yellow fg:color_orange)\
 $directory\
@@ -86,7 +87,8 @@ format = '[ $user]($style)'
 [hostname]
 ssh_only = true
 style = "bg:color_orange fg:color_fg0"
-format = "[@$hostname ]($style)"
+#format = "[@$hostname ]($style)"
+format = "[ $hostname ]($style)"
 [hostname.aliases]
 'Donkey-Kong' = 'Donkey Kong'
 
