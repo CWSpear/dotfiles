@@ -84,9 +84,9 @@ style_root = "bg:color_orange fg:color_fg0"
 format = '[ $user]($style)'
 
 [hostname]
-ssh_only = false
+ssh_only = true
 style = "bg:color_orange fg:color_fg0"
-format = "[@$hostname]($style)"
+format = "[@$hostname ]($style)"
 [hostname.aliases]
 'Donkey-Kong' = 'Donkey Kong'
 
