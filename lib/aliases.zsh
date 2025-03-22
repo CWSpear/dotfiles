@@ -14,6 +14,8 @@ alias dcp="docker compose -f docker-compose.yml -f docker-compose.production.yml
 alias dm="docker-machine"
 alias drm="docker-rmrf"
 
+alias lg="lazygit"
+
 alias vudo=vgdo
 
 alias mblt='lt --host "http://tunnel.matchbooklab.com"'

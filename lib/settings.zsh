@@ -47,6 +47,16 @@ bindkey -s "^[OS" "-"
 bindkey -s "^[Ol" "+"
 # END Keypad
 
+
+#bindkey "\eOc" forward-word
+#bindkey "\eOd" backward-word
+#bindkey "\e[1;5C" forward-word
+#bindkey "\e[1;5D" backward-word
+#bindkey "\e[5C" forward-word
+#bindkey "\e[5D" backward-word
+#bindkey "\e\e[C" forward-word
+#bindkey "\e\e[D" backward-word
+
 autoload -U add-zsh-hook
 
 auto-dockercontext() {

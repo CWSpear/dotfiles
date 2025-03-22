@@ -5,7 +5,7 @@ if [[ -n $SSH_CONNECTION ]]; then
   # remote stuff only
 else
   # local stuff only
-  export VISUAL='subl'
+#  export VISUAL='subl'
 fi
 
 export HISTFILE="${HOME}/.zsh_history"
@@ -35,21 +35,21 @@ export PATH=${PATH}:/sbin
 export PATH="$PATH:$HOME/.bin"
 
 # global composer
-export PATH="$PATH:$HOME/.composer/vendor/bin"
+# export PATH="$PATH:$HOME/.composer/vendor/bin"
 
 # Added by the Heroku Toolbelt
-export PATH="$PATH:/usr/local/heroku/bin"
+# export PATH="$PATH:/usr/local/heroku/bin"
 
 # Xcode
 export PATH=${PATH}:/Development/android-sdk-macosx/platform-tools:/Development/android-sdk-macosx/tools:/usr/local/share/npm/bin:/Development/android-ndk-macosx:/usr/local/share/python
 
 # Add RVM to PATH for scripting
-export PATH="$PATH:$HOME/.rvm/bin"
+# export PATH="$PATH:$HOME/.rvm/bin"
 
 export MANPATH="/usr/local/man:$MANPATH"
 
 # Homestead vagrantfile directory
-export HOMESTEAD_VM_DIR=$HOME/Sites/homestead
+# export HOMESTEAD_VM_DIR=$HOME/Sites/homestead
 
 # remove duplicates
 PATH=$(echo "$PATH" | awk -v RS=':' -v ORS=":" '!a[$1]++{if (NR > 1) printf ORS; printf $a[$1]}')
