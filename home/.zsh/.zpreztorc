@@ -25,5 +25,5 @@ zstyle ':prezto:load' pmodule \
 
 zstyle ':prezto:module:history-substring-search:color' found 'bg=blue,fg=white,bold'
 
-zstyle ':prezto:module:prompt' theme 'sorinalt'
+#zstyle ':prezto:module:prompt' theme 'sorinalt'
 #zstyle ':prezto:module:prompt' theme 'powerlevel10k'
