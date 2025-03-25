@@ -197,6 +197,8 @@ format = '[[  $time ](fg:color_fg0 bg:color_bg1)]($style)'
 [cmd_duration]
 style = "bg:color_bg1 fg:yellow"
 format = '[  $duration]($style)'
+show_notifications = true
+min_time_to_notify = 23123
 
 [line_break]
 disabled = false
