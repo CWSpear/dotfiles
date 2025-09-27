@@ -3,6 +3,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
 syntax enable
+set re=0
 
 " Set extra options when running in GUI mode
 if has("gui_running")

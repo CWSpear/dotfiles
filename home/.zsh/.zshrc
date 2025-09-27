@@ -53,12 +53,6 @@ if (( $+commands[direnv] )); then
 fi
 
 
-# fnm
-FNM_PATH="/Users/cwspear/Library/Application Support/fnm"
-if [ -d "$FNM_PATH" ]; then
-  export PATH="/Users/cwspear/Library/Application Support/fnm:$PATH"
-  eval "`fnm env`"
-fi
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
 fpath=(/Users/cwspear/.docker/completions $fpath)
 autoload -Uz compinit
