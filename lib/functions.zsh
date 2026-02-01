@@ -131,8 +131,17 @@ function mcp() {
 }
 
 function dcon() {
-  docker context use "$1"
-  export DOCKER_CONTEXT="$1"
+  unset DOCKER_TLS_VERIFY
+  unset DOCKER_HOST
+  unset DOCKER_CERT_PATH
+  unset DOCKER_MACHINE_NAME
+
+  # docker context use "$1"
+  if [[ "$1" == "default" ]]; then
+    unset DOCKER_CONTEXT
+  else
+    export DOCKER_CONTEXT="$1"
+  fi
 }
 
 function find-up() {

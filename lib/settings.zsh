@@ -60,15 +60,21 @@ bindkey -s "^[Ol" "+"
 autoload -U add-zsh-hook
 
 auto-dockercontext() {
+  BLUE='\033[0;34m'
+  NC='\033[0m' # No Color (resets the color)
+
   dockercontext_path=$(find-up .dockercontext | tr -d '[:space:]')
 
   if [ -n "$dockercontext_path" ]; then
     dockercontext=`cat $dockercontext_path/.dockercontext`
-    docker context use $dockercontext
-    export DOCKER_CONTEXT="$dockercontext"
+    echo "Setting docker context based on .dockercontext: ${BLUE}$dockercontext${NC}"
+    dcon $dockercontext > /dev/null 2>&1
+  #elif [ -n "$DOCKER_CONTEXT" ]; then
+    #echo "Setting docker context to value in \$DOCKER_CONTEXT: ${BLUE}$DOCKER_CONTEXT${NC}"
+    #docker context use $DOCKER_CONTEXT > /dev/null 2>&1
   else
-    echo "Reverting to docker context default version"
-    export DOCKER_CONTEXT="default"
+    echo "Clearing DOCKER_CONTEXT (using Docker's current context)"
+    dcon default > /dev/null 2>&1
   fi
 }
 

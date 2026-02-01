@@ -31,3 +31,7 @@ unalias lt # local tunnel
 if type "bat" > /dev/null 2>&1; then
   alias cat='bat --paging=never --style=plain'
 fi
+
+# pnpm is hard to type
+alias pn=pnpm
+
