@@ -184,11 +184,18 @@ dcp() {
 
 sshoon() {
   local target="$1"
-  echo "Waiting for $target to come back online..."
-  until ssh -o ConnectTimeout=2 -o BatchMode=yes "$target" 'exit' 2>/dev/null; do
+  local host port
+
+  host=$(ssh -G "$target" 2>/dev/null | awk '$1 == "hostname" { print $2; exit }')
+  port=$(ssh -G "$target" 2>/dev/null | awk '$1 == "port" { print $2; exit }')
+
+  echo "Waiting for $target ($host:$port) to come back online..."
+
+  until nc -z -w 2 "$host" "$port" 2>/dev/null; do
     printf "."
     sleep 1
   done
-  echo -e "\nServer up! Connecting..."
+
+  echo "\nSSH is up! Connecting..."
   ssh "$target"
 }
