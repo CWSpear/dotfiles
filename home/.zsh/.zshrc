@@ -1,9 +1,11 @@
 # START=`ruby -e 'puts Time.now.to_f'`
+# also toggle zprof at the end
+# zmodload zsh/zprof
 
 if [[ -n "$_REAL_ZSH_SOURCED" ]]; then
     return 0
 fi
-export _REAL_ZSH_SOURCED=1
+_REAL_ZSH_SOURCED=1
 
 umask 022
 
@@ -72,8 +74,8 @@ if (( $+commands[starship] )); then
   eval "$(starship init zsh)"
 fi
 
-# bun completions
-[ -s "/Users/cwspear/.bun/_bun" ] && source "/Users/cwspear/.bun/_bun"
+# bun completions (disabled)
+# [ -s "/Users/cwspear/.bun/_bun" ] && source "/Users/cwspear/.bun/_bun"
 
 
 # this enabled IntelliJ to load env variables
@@ -81,3 +83,5 @@ if [[ -n "$INTELLIJ_ENVIRONMENT_READER" ]]; then
   unsetopt noclobber 2>/dev/null
   setopt clobber
 fi
+
+# zprof

@@ -85,62 +85,68 @@ function docker-rmrf {
   fi
 }
 
-function dnpm() {
-  if [ -n "$DNPM_VERSION" ]; then
-    local current=`node --version`
-    DNPM_VERSION="${current/v/}"
+function auto-dockercontext() {
+  BLUE='\033[0;34m'
+  GREEN='\033[0;32m'
+  NC='\033[0m' # No Color (resets the color)
+
+  if [[ "$MANUAL_DOCKER_CONTEXT_IS_SET" == "1" && "$DOCKER_CONTEXT" != "default" ]]; then
+    echo "Docker Context was manually set with ${GREEN}dcon${NC}, staying on ${BLUE}${DOCKER_CONTEXT}${NC}"
+    return
   fi
 
-  echo Running npm $@ with Node $DNPM_VERSION
+  dockercontext_path=$(find-up .dockercontext | tr -d '[:space:]')
 
-  docker run -i \
-    -v `pwd`:/src \
-    -w /src \
-    --entrypoint /usr/local/bin/npm \
-    node:$version \
-      $@
-}
-
-
-# # Homestead shorcuts
-function homestead {
-  # run in a subshell so we don't change dirs
-  (cd $HOMESTEAD_VM_DIR && vagrant $@)
-}
-
-function docker-local-persist {
-    docker rm --force local-persist
-    docker run -d --restart always \
-        -v /run/docker/plugins/:/run/docker/plugins/ \
-        -v /data/plugin-data/:/var/lib/docker/plugin-data/ \
-        -v /data/:/data/ \
-        --name local-persist \
-            cwspear/docker-local-persist-volume-plugin
-}
-
-# function go {
-#     docker run --rm -v /go/bin/:/go/bin/ -v `pwd`:/go/src -w /go/src golang $@
-# }
-
-
-function mcp() {
-  for file in "$@"
-  do
-    scp "$file" lakitu.local:/Volumes/Ice/Movies
-  done
+  if [ -n "$dockercontext_path" ]; then
+    dockercontext=`cat $dockercontext_path/.dockercontext`
+    current_dockercontext=${DOCKER_CONTEXT:-default}
+    if [ "$dockercontext" != "$current_dockercontext" ]; then
+      echo "Setting docker context based on .dockercontext: ${BLUE}$dockercontext${NC}"
+      dcon $dockercontext > /dev/null 2>&1
+      unset MANUAL_DOCKER_CONTEXT_IS_SET
+    fi
+  #elif [ -n "$DOCKER_CONTEXT" ]; then
+    #echo "Setting docker context to value in \$DOCKER_CONTEXT: ${BLUE}$DOCKER_CONTEXT${NC}"
+    #docker context use $DOCKER_CONTEXT > /dev/null 2>&1
+  else
+    if [ -n "$DOCKER_CONTEXT" ]; then
+      echo "Clearing DOCKER_CONTEXT (using Docker's current context)"
+      dcon default > /dev/null 2>&1
+      unset MANUAL_DOCKER_CONTEXT_IS_SET
+    fi
+  fi
 }
 
 function dcon() {
+  new_context="$1"
+
+  if [[ "$new_context" == "unset" ]]; then
+    # unset does the same thing as `default`, except it also attempts to load from `.dockercontext`
+    run_auto_load="1"
+    new_context="default"
+  fi
+
+
+  if ! docker context ls -q | grep -Fxq "$new_context"; then
+    print -P "%F{cyan}${new_context}%f does not exist"
+    return
+  fi
+
   unset DOCKER_TLS_VERIFY
   unset DOCKER_HOST
   unset DOCKER_CERT_PATH
   unset DOCKER_MACHINE_NAME
 
   # docker context use "$1"
-  if [[ "$1" == "default" ]]; then
+  if [[ "$new_context" == "default" ]]; then
     unset DOCKER_CONTEXT
+    unset MANUAL_DOCKER_CONTEXT_IS_SET
+    if [[ "$run_auto_load" == "1" ]]; then
+      auto-dockercontext
+    fi
   else
-    export DOCKER_CONTEXT="$1"
+    export DOCKER_CONTEXT="$new_context"
+    export MANUAL_DOCKER_CONTEXT_IS_SET="1"
   fi
 }
 
@@ -150,4 +156,39 @@ function find-up() {
     path=${path%/*}
   done
   echo "$path"
+}
+
+# allows doing `dcp --context pandora up -d`, rerouting `--context` as a docker flag (instead of a compose flag)
+dcp() {
+  local docker_args=()
+  local compose_files=(-f docker-compose.yml -f docker-compose.production.yml)
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --context|-c)
+        docker_args+=("$1" "$2")
+        shift 2
+        ;;
+      --context=*)
+        docker_args+=("$1")
+        shift
+        ;;
+      *)
+        break
+        ;;
+    esac
+  done
+
+  docker "${docker_args[@]}" compose "${compose_files[@]}" "$@"
+}
+
+sshoon() {
+  local target="$1"
+  echo "Waiting for $target to come back online..."
+  until ssh -o ConnectTimeout=2 -o BatchMode=yes "$target" 'exit' 2>/dev/null; do
+    printf "."
+    sleep 1
+  done
+  echo -e "\nServer up! Connecting..."
+  ssh "$target"
 }
