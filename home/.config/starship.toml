@@ -6,7 +6,7 @@
 format = """
 [](color_orange)\
 [$os ](bg:color_orange)\
-$hostname\
+${custom.hostname}\
 [](bg:color_yellow fg:color_orange)\
 $directory\
 [](fg:color_yellow bg:color_aqua)\
@@ -86,13 +86,11 @@ style_user = "bg:color_orange fg:color_fg0"
 style_root = "bg:color_orange fg:color_fg0"
 format = '[ $user]($style)'
 
-[hostname]
-ssh_only = true
+[custom.hostname]
+when = '[ -n "$SSH_CONNECTION$SSH_CLIENT$SSH_TTY" ]'
+command = "hostname -s | awk -F- '{ for (i = 1; i <= NF; i++) $i = toupper(substr($i, 1, 1)) tolower(substr($i, 2)); print }'"
 style = "bg:color_orange fg:color_fg0"
-#format = "[@$hostname ]($style)"
-format = "[ $hostname ]($style)"
-[hostname.aliases]
-'Donkey-Kong' = 'Donkey Kong'
+format = '[ $output ]($style)'
 
 [directory]
 style = "fg:color_fg0 bg:color_yellow"
