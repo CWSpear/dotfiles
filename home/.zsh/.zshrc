@@ -1,11 +1,11 @@
-# START=`ruby -e 'puts Time.now.to_f'`
 # also toggle zprof at the end
 # zmodload zsh/zprof
 
-if [[ -n "$_REAL_ZSH_SOURCED" ]]; then
+# Prevent repeated sourcing in this shell without skipping setup in child shells.
+if [[ "$_REAL_ZSH_SOURCED" == "$$" ]]; then
     return 0
 fi
-_REAL_ZSH_SOURCED=1
+typeset -g +x _REAL_ZSH_SOURCED=$$
 
 umask 022
 
@@ -84,4 +84,5 @@ if [[ -n "$INTELLIJ_ENVIRONMENT_READER" ]]; then
   setopt clobber
 fi
 
-# zprof
+# opencode
+[[ -d "$HOME/.opencode/bin" ]] && export PATH="$HOME/.opencode/bin:$PATH"
